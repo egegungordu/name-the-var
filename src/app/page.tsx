@@ -1,87 +1,20 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { LuUser } from "react-icons/lu";
-import { FaRust } from "react-icons/fa";
-import {
-  SiJavascript,
-  SiTypescript,
-  SiPython,
-  SiC,
-  SiCplusplus,
-  SiCsharp,
-  SiGo,
-} from "react-icons/si";
-import { useState } from "react";
-import Image from "next/image";
-
-const LANGUAGES = [
-  {
-    name: "JavaScript",
-    paranthesis: "",
-    slug: "javascript",
-    color: "#f1e05a",
-    logo: SiJavascript,
-  },
-  {
-    name: "TypeScript",
-    paranthesis: "",
-    slug: "typescript",
-    color: "#2b7489",
-    logo: SiTypescript,
-  },
-  {
-    name: "Python",
-    paranthesis: "",
-    slug: "python",
-    color: "#3572a5",
-    logo: SiPython,
-  },
-  {
-    name: "Rust",
-    // paranthesis is implemented just for this lmao
-    paranthesis: "Unofficial",
-    slug: "rust",
-    color: "#dea584",
-    logo: FaRust,
-  },
-  {
-    name: "C",
-    paranthesis: "",
-    slug: "c",
-    color: "#555555",
-    logo: SiC,
-  },
-  {
-    name: "C++",
-    paranthesis: "",
-    slug: "cpp",
-    color: "#f34b7d",
-    logo: SiCplusplus,
-  },
-  {
-    name: "C#",
-    paranthesis: "",
-    slug: "csharp",
-    color: "#178600",
-    logo: SiCsharp,
-  },
-  {
-    name: "Go",
-    paranthesis: "",
-    slug: "go",
-    color: "#00ADD8",
-    logo: SiGo,
-  },
-];
-
-const GO_INDEX = LANGUAGES.findIndex((lang) => lang.slug === "go");
+import { useNTVStore } from "@/store/store";
 
 export default function Home() {
-  const [selectedLanguage, setSelectedLanguage] = useState(0);
-  const startPrompt = selectedLanguage === GO_INDEX ? "Go" : "Start";
   const today = new Date();
   const dayOfWeek = today.getDay();
+  const languages = useNTVStore((state) => state.languages);
+  const selectLanguage = useNTVStore((state) => state.selectLanguage);
+  const selectedLanguage = useNTVStore((state) => state.selectedLanguage);
+  const buttonPrompt = selectedLanguage ? "Start" : "Select a language";
+  const disableButton = !selectedLanguage;
+
+  const handleClickLanguage = (languageSlug: string) => {
+    selectLanguage(languageSlug);
+  };
 
   return (
     <main className="relative isolate mx-auto flex h-full flex-col">
@@ -123,7 +56,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="mt-4 flex divide-x text-xs text-neutral-500 text-center">
+        <div className="mt-4 flex divide-x text-center text-xs text-neutral-500">
           <div className="px-2">
             <span className="font-bold tabular-nums text-neutral-800">
               172,302{" "}
@@ -131,7 +64,9 @@ export default function Home() {
             guesses
           </div>
           <div className="px-2">
-            <span className="font-bold tabular-nums text-neutral-800">JavaScript</span>{" "}
+            <span className="font-bold tabular-nums text-neutral-800">
+              JavaScript
+            </span>{" "}
             most popular
           </div>
           <div className="px-2">
@@ -141,28 +76,28 @@ export default function Home() {
         </div>
 
         <div className="mt-6 grid w-full grid-cols-2 gap-2 sm:grid-cols-4">
-          {LANGUAGES.map((lang, index) => (
+          {languages.map((lang) => (
             <button
-              onClick={() => setSelectedLanguage(index)}
+              onClick={() => handleClickLanguage(lang.slug)}
               key={lang.slug}
               className={cn(
                 "relative isolate flex items-center gap-2 overflow-hidden rounded-md border border-neutral-200 bg-white p-3 transition-all hover:opacity-100 sm:flex-col sm:justify-center",
                 {
                   "border-neutral-800 ring-2 ring-neutral-800":
-                    index === selectedLanguage,
-                  "opacity-60": index !== selectedLanguage,
+                    lang.slug === selectedLanguage?.slug,
+                  "opacity-60": lang.slug !== selectedLanguage?.slug,
                 },
               )}
             >
               <lang.logo className="h-4 w-4 drop-shadow-md sm:h-8 sm:w-8" />
               <span className="overflow-hidden text-ellipsis whitespace-nowrap text-center text-xs font-semibold text-neutral-700">
                 {lang.name}
-                {lang.paranthesis && (
-                  <span className="font-normal"> ({lang.paranthesis})</span>
+                {lang.extra && (
+                  <span className="font-normal"> ({lang.extra})</span>
                 )}
               </span>
 
-              {index === selectedLanguage && (
+              {lang.slug === selectedLanguage?.slug && (
                 <div
                   className="absolute left-1/2 top-0 -z-10 h-20 w-[150%] -translate-x-1/2 -translate-y-1/2 animate-selected-language-in bg-gradient-radial from-black via-transparent blur-md"
                   style={{ "--tw-gradient-from": lang.color } as any}
@@ -172,8 +107,11 @@ export default function Home() {
           ))}
         </div>
 
-        <button className="mt-6 rounded-full bg-neutral-800 px-5 py-3 font-medium text-white transition-all duration-100 hover:bg-neutral-700 active:scale-95 sm:px-4 sm:py-2">
-          {startPrompt}
+        <button
+          disabled={disableButton}
+          className="mt-6 disabled:opacity-50 rounded-full bg-neutral-800 px-5 py-3 font-medium text-white transition-all duration-100 hover:bg-neutral-700 active:scale-95 sm:px-4 sm:py-2"
+        >
+          {buttonPrompt}
         </button>
       </div>
     </main>
