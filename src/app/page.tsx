@@ -109,7 +109,7 @@ export default function Home() {
 
         <button
           disabled={disableButton}
-          className="mt-6 disabled:opacity-50 rounded-full bg-neutral-800 px-5 py-3 font-medium text-white transition-all duration-100 hover:bg-neutral-700 active:scale-95 sm:px-4 sm:py-2"
+          className="mt-6 rounded-full bg-neutral-800 px-5 py-3 font-medium text-white transition-all duration-100 hover:bg-neutral-700 active:scale-95 disabled:opacity-50 sm:px-4 sm:py-2"
         >
           {buttonPrompt}
         </button>
