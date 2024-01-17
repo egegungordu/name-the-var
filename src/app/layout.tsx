@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { LuUser, LuGithub } from "react-icons/lu";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,8 +19,38 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, "h-dvh bg-neutral-50 text-sm")}>
+      <body
+        className={cn(
+          inter.className,
+          "flex h-dvh flex-col bg-neutral-50 text-sm px-4 md:px-10",
+        )}
+      >
+        <div className="flex w-full max-w-screen-md mx-auto justify-between py-4">
+          <div className="text-base font-semibold text-neutral-700 underline decoration-red-400 decoration-2">
+            <span className="mr-1 font-mono text-lg font-normal">$</span>
+            nameTheVar
+          </div>
+
+          <button className="rounded-full p-2 text-neutral-500 hover:bg-white">
+            <LuUser className="h-5 w-5 sm:h-4 sm:w-4" />
+          </button>
+        </div>
+
         {children}
+
+        <div className="flex w-full mx-auto max-w-screen-md pb-4 text-xs">
+          <span className="ml-auto">
+            <Link
+              href="https://github.com/egegungordu/name-the-var"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-neutral-400 hover:text-neutral-800 transition-colors"
+            >
+            <LuGithub className="h-4 w-4" />
+              Source
+            </Link>
+          </span>
+        </div>
       </body>
     </html>
   );

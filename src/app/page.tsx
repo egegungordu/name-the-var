@@ -80,20 +80,11 @@ const GO_INDEX = LANGUAGES.findIndex((lang) => lang.slug === "go");
 export default function Home() {
   const [selectedLanguage, setSelectedLanguage] = useState(0);
   const startPrompt = selectedLanguage === GO_INDEX ? "Go" : "Start";
+  const today = new Date();
+  const dayOfWeek = today.getDay();
 
   return (
-    <main className="relative isolate mx-auto flex h-full w-full max-w-screen-lg flex-col px-10">
-      <div className="flex w-full justify-between py-4">
-        <div className="text-base font-semibold text-neutral-700 underline decoration-red-400 decoration-2">
-          <span className="mr-1 font-mono text-lg font-normal">$</span>
-          nameTheVar
-        </div>
-
-        <button className="rounded-full p-2 text-neutral-500 hover:bg-white">
-          <LuUser className="h-4 w-4" />
-        </button>
-      </div>
-
+    <main className="relative isolate mx-auto flex h-full flex-col">
       {/*<Image
         src="/bg.png"
         alt="background"
@@ -103,70 +94,87 @@ export default function Home() {
         style={{ "left": "50%", "top": "50%", "transform": "translate(-50%, -50%)" } as any}
       />*/}
 
-      <div className="flex h-full flex-1 flex-col">
-        <div className="relative my-auto pb-20">
-          <div className="px-2">
-            <p className="mx-auto max-w-sm text-center text-neutral-700">
-              Guess the daily variable names from popular open source projects
-              and see how you compare to others.
-            </p>
+      <div className="relative mx-auto my-auto flex max-w-lg flex-col items-center pb-20">
+        <div className="text-neutral-700">
+          <div className="flex flex-col-reverse items-center justify-between gap-3 sm:flex-row">
+            <div className="text-xs font-semibold">
+              {today.toLocaleDateString("en-US", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </div>
+            <div className="flex gap-1">
+              {Array.from({ length: 7 }).map((_, index) => (
+                <div
+                  key={index}
+                  className={cn(
+                    "h-2 w-2 rounded-full",
+                    index === dayOfWeek ? "bg-neutral-800" : "bg-neutral-200",
+                  )}
+                />
+              ))}
+            </div>
           </div>
+          <p className="mt-2 max-w-md">
+            Guess the daily variable name from popular open source projects and
+            see how you compare to others.
+          </p>
+        </div>
 
-          <div className="mt-4 text-center text-xs text-neutral-500">
+        <div className="mt-4 flex divide-x text-xs text-neutral-500 text-center">
+          <div className="px-2">
             <span className="font-bold tabular-nums text-neutral-800">
               172,302{" "}
             </span>
             guesses
-            <span className="mx-2">|</span>
-            <span className="font-bold tabular-nums text-neutral-800">
-              JS
-            </span>{" "}
+          </div>
+          <div className="px-2">
+            <span className="font-bold tabular-nums text-neutral-800">JavaScript</span>{" "}
             most popular
-            <span className="mx-2">|</span>
-            <span className="font-bold tabular-nums text-neutral-800">
-              72%
-            </span>{" "}
+          </div>
+          <div className="px-2">
+            <span className="font-bold tabular-nums text-neutral-800">72%</span>{" "}
             guessed correctly
           </div>
-
-          <div className="mx-auto mt-6 grid max-w-lg grid-cols-4 flex-wrap gap-2">
-            {LANGUAGES.map((lang, index) => (
-              <button
-                onClick={() => setSelectedLanguage(index)}
-                key={lang.slug}
-                className={cn(
-                  "relative isolate flex flex-col justify-center overflow-hidden rounded-md border border-neutral-200 bg-white p-3 transition-all hover:bg-neutral-50",
-                  {
-                    "border-neutral-800 ring-2 ring-neutral-800":
-                      index === selectedLanguage,
-                    "opacity-60": index !== selectedLanguage,
-                  },
-                )}
-              >
-                <lang.logo className="mx-auto mb-2 h-8 w-8 drop-shadow-md" />
-                <span className="overflow-hidden text-ellipsis whitespace-nowrap text-center text-xs font-semibold text-neutral-700">
-                  {lang.name}
-                  {lang.paranthesis && (
-                    <span className="font-normal"> ({lang.paranthesis})</span>
-                  )}
-                </span>
-
-                {index === selectedLanguage && (
-                  <div
-                    className="absolute left-1/2 top-0 -z-10 h-20 w-[150%] -translate-x-1/2 -translate-y-1/2 animate-selected-language-in bg-gradient-radial from-black via-transparent blur-md"
-                    style={{ "--tw-gradient-from": lang.color } as any}
-                  />
-                )}
-              </button>
-            ))}
-          </div>
-
-          <div className="mt-6 flex justify-center">
-            <button className="rounded-full bg-neutral-800 px-4 py-2 font-medium text-white transition-all duration-100 hover:bg-neutral-700 active:scale-95">
-              {startPrompt}
-            </button>
-          </div>
         </div>
+
+        <div className="mt-6 grid w-full grid-cols-2 gap-2 sm:grid-cols-4">
+          {LANGUAGES.map((lang, index) => (
+            <button
+              onClick={() => setSelectedLanguage(index)}
+              key={lang.slug}
+              className={cn(
+                "relative isolate flex items-center gap-2 overflow-hidden rounded-md border border-neutral-200 bg-white p-3 transition-all hover:opacity-100 sm:flex-col sm:justify-center",
+                {
+                  "border-neutral-800 ring-2 ring-neutral-800":
+                    index === selectedLanguage,
+                  "opacity-60": index !== selectedLanguage,
+                },
+              )}
+            >
+              <lang.logo className="h-4 w-4 drop-shadow-md sm:h-8 sm:w-8" />
+              <span className="overflow-hidden text-ellipsis whitespace-nowrap text-center text-xs font-semibold text-neutral-700">
+                {lang.name}
+                {lang.paranthesis && (
+                  <span className="font-normal"> ({lang.paranthesis})</span>
+                )}
+              </span>
+
+              {index === selectedLanguage && (
+                <div
+                  className="absolute left-1/2 top-0 -z-10 h-20 w-[150%] -translate-x-1/2 -translate-y-1/2 animate-selected-language-in bg-gradient-radial from-black via-transparent blur-md"
+                  style={{ "--tw-gradient-from": lang.color } as any}
+                />
+              )}
+            </button>
+          ))}
+        </div>
+
+        <button className="mt-6 rounded-full bg-neutral-800 px-5 py-3 font-medium text-white transition-all duration-100 hover:bg-neutral-700 active:scale-95 sm:px-4 sm:py-2">
+          {startPrompt}
+        </button>
       </div>
     </main>
   );
