@@ -15,6 +15,7 @@ const config: Config = {
       },
       animation: {
         "selected-language-in": "selected-language-in 0.1s ease-in-out",
+        "squiggly-slide": "squiggly-slide 6s linear infinite",
       },
       keyframes: {
         "selected-language-in": {
@@ -25,6 +26,14 @@ const config: Config = {
           "100%": {
             opacity: "1",
             transform: "translate3d(-50%, -50%, 0)",
+          },
+        },
+        "squiggly-slide": {
+          "0%": {
+            backgroundPosition: "0% 100%",
+          },
+          "100%": {
+            backgroundPosition: "90px 100%",
           },
         },
       },

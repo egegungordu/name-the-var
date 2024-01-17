@@ -21,7 +21,10 @@ export default function Header() {
       <div className="relative">
         <Link
           href="/"
-          className="whitespace-nowrap text-2xl font-semibold text-neutral-700 underline decoration-red-400 decoration-2"
+          className="whitespace-nowrap text-2xl font-semibold text-neutral-700 bg-[url('/squiggly.png')] bg-repeat-x pb-2 animate-squiggly-slide hover:text-neutral-400"
+          style={{
+            backgroundPosition: "0% 100%",
+          }}
         >
           {title}
         </Link>

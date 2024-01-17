@@ -83,7 +83,7 @@ export default function Home() {
               className={cn(
                 "relative isolate flex items-center gap-2 overflow-hidden rounded-md border border-neutral-200 bg-white p-3 transition-all hover:opacity-100 sm:flex-col sm:justify-center",
                 {
-                  "border-neutral-800 ring-2 ring-neutral-800":
+                  "border-neutral-800 ring-1 ring-neutral-800":
                     lang.slug === selectedLanguage?.slug,
                   "opacity-60": lang.slug !== selectedLanguage?.slug,
                 },
