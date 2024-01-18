@@ -5,3 +5,7 @@
 .hljs-placeholder {
   @apply bg-neutral-200 rounded-md min-w-6 inline-block px-2 font-semibold;
 }
+
+::selection {
+  @apply bg-red-500 text-white;
+}
