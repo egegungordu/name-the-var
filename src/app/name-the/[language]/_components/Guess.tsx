@@ -1,6 +1,6 @@
 "use client";
 
-import { CSSProperties, useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 
 const codeAreaMask = "linear-gradient(90deg, black 90%, transparent)";
 
@@ -23,9 +23,9 @@ export default function Guess({ codeHtml }: { codeHtml: string }) {
         className="my-auto w-full overflow-hidden"
         style={
           {
-            "mask-image": codeAreaMask,
-            "-webkit-mask-image": codeAreaMask,
-          } as CSSProperties
+            maskImage: codeAreaMask,
+            WebkitMaskImage: codeAreaMask,
+          }
         }
       >
         <code
