@@ -29,7 +29,7 @@ export default function Guess({ codeHtml }: { codeHtml: string }) {
   });
 
   return (
-    <div className="mx-auto flex max-w-full flex-1 animate-fade-in flex-col items-start lg:max-w-screen-md">
+    <div className="mx-auto flex max-w-full flex-1 animate-fade-in flex-col items-start lg:max-w-screen-md w-full">
       <div className="mt-auto w-full">
         <Hint />
       </div>
