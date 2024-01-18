@@ -10,17 +10,19 @@ import go from "highlight.js/lib/languages/go";
 import "highlight.js/styles/panda-syntax-light.css";
 import { LanguageFn } from "highlight.js";
 
-export const PLACEHOLDER = "__PLACEHOLDER__mikasa_best_girl__";
+export const PLACEHOLDER = "___PLACEHOLDER_MIKASA_BEST_GIRL___";
 
-// add PLACEHOLDER as a special 'keyword' to all languages
+// add PLACEHOLDER as a special keyword to all given language
 function languageWithPlaceholder(language: LanguageFn): LanguageFn {
   const lang = language(hljs);
-  lang.keywords;
-  lang.contains.push({
-    className: "placeholder",
-    begin: `\\b${PLACEHOLDER}\\b`,
-    relevance: 0,
-  });
+
+  if (lang.keywords) {
+    Object.assign(lang.keywords, {
+      // this key name determines the class name
+      // hljs-<key name>
+      placeholder: [PLACEHOLDER],
+    });
+  }
 
   return () => lang;
 }
