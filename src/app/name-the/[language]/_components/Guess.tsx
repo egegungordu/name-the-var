@@ -1,13 +1,20 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import useLayoutEffectOnce from "@/utils/use-layout-effect-once";
+import useWindowEventListener from "@/utils/use-window-event-listener";
+import { useRef } from "react";
 
 const codeAreaMask = "linear-gradient(90deg, black 90%, transparent)";
 
 export default function Guess({ codeHtml }: { codeHtml: string }) {
   const codeRef = useRef<HTMLPreElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  useLayoutEffect(() => {
+  useWindowEventListener("keydown", () => {
+    inputRef.current?.focus();
+  });
+
+  useLayoutEffectOnce(() => {
     const placeholder = codeRef.current?.querySelectorAll(".hljs-placeholder");
 
     if (placeholder) {
@@ -15,7 +22,7 @@ export default function Guess({ codeHtml }: { codeHtml: string }) {
         el.textContent = "?";
       });
     }
-  }, []);
+  });
 
   return (
     <div className="mx-auto flex h-full max-w-screen-md animate-fade-in flex-col items-start">
@@ -37,6 +44,7 @@ export default function Guess({ codeHtml }: { codeHtml: string }) {
 
       <div className="w-full self-center">
         <input
+          ref={inputRef}
           autoFocus
           // disable paste
           onPaste={(e) => {
@@ -61,7 +69,7 @@ export default function Guess({ codeHtml }: { codeHtml: string }) {
             }
           }}
           type="text"
-          className="w-full rounded-md border border-neutral-300 px-4 py-2"
+          className="w-full rounded-md px-4 py-2 focus:outline-none shadow-lg shadow-black/5"
         />
       </div>
     </div>
