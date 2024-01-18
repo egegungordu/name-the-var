@@ -23,7 +23,7 @@ export default function Guess({ codeHtml }: { codeHtml: string }) {
         className="my-auto w-full overflow-hidden"
         style={
           {
-            "-mask-image": codeAreaMask,
+            "mask-image": codeAreaMask,
             "-webkit-mask-image": codeAreaMask,
           } as CSSProperties
         }
