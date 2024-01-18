@@ -1,21 +1,20 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useNTVStore } from "@/store/store";
+import { LANGUAGES } from "@/languages";
 import { useRouter } from "next/navigation";
+import { useQueryState } from "nuqs";
 
 export default function Home() {
   const router = useRouter();
   const today = new Date();
   const dayOfWeek = today.getDay();
-  const languages = useNTVStore((state) => state.languages);
-  const selectLanguage = useNTVStore((state) => state.selectLanguage);
-  const selectedLanguage = useNTVStore((state) => state.selectedLanguage);
-  const buttonPrompt = selectedLanguage ? "Start" : "Select a language";
-  const disableButton = !selectedLanguage;
+  const [selectedLanguageSlug, setSelectedLanguageSlug] = useQueryState("lang");
+  const buttonPrompt = selectedLanguageSlug ? "Start" : "Select a language";
+  const disableButton = !selectedLanguageSlug;
 
   const handleClickLanguage = (languageSlug: string) => {
-    selectLanguage(languageSlug);
+    setSelectedLanguageSlug(languageSlug);
   };
 
   return (
@@ -78,7 +77,7 @@ export default function Home() {
         </div>
 
         <div className="mt-6 grid w-full grid-cols-2 gap-2 sm:grid-cols-4">
-          {languages.map((lang) => (
+          {LANGUAGES.map((lang) => (
             <button
               onClick={() => handleClickLanguage(lang.slug)}
               key={lang.slug}
@@ -86,8 +85,8 @@ export default function Home() {
                 "relative isolate flex items-center gap-2 overflow-hidden rounded-md border border-neutral-200 bg-white p-3 transition-all hover:opacity-100 sm:flex-col sm:justify-center",
                 {
                   "border-neutral-800 ring-1 ring-neutral-800":
-                    lang.slug === selectedLanguage?.slug,
-                  "opacity-60": lang.slug !== selectedLanguage?.slug,
+                    lang.slug === selectedLanguageSlug,
+                  "opacity-60": lang.slug !== selectedLanguageSlug,
                 },
               )}
             >
@@ -99,7 +98,7 @@ export default function Home() {
                 )}
               </span>
 
-              {lang.slug === selectedLanguage?.slug && (
+              {lang.slug === selectedLanguageSlug && (
                 <div
                   className="absolute left-1/2 top-0 -z-10 h-20 w-[150%] -translate-x-1/2 -translate-y-1/2 animate-selected-language-in bg-gradient-radial from-black via-transparent blur-md"
                   style={{ "--tw-gradient-from": lang.color } as any}
@@ -111,7 +110,7 @@ export default function Home() {
 
         <button
           onClick={() => {
-            router.push(`/name-the/${selectedLanguage?.slug}`);
+            router.push(`/name-the/${selectedLanguageSlug}`);
           }}
           disabled={disableButton}
           className="mt-6 rounded-full bg-neutral-800 px-5 py-3 font-medium text-white transition-all duration-100 hover:bg-neutral-700 active:scale-95 disabled:opacity-50 sm:px-4 sm:py-2"

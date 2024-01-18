@@ -1,11 +1,23 @@
 "use client";
 
 import { LuUser } from "react-icons/lu";
-import { useNTVStore } from "@/store/store";
 import Link from "next/link";
+import { useQueryState } from "nuqs";
+import { LANGUAGES } from "@/languages";
+import { usePathname } from "next/navigation";
+
+function useSelectedLanguage() {
+  let [selectedLanguageSlug] = useQueryState("lang");
+  const pathname = usePathname();
+  if (!selectedLanguageSlug) {
+    const regex = /^\/name-the\/([^/]+)/;
+    selectedLanguageSlug = pathname.match(regex)?.[1] ?? null;
+  }
+  return LANGUAGES.find((language) => language.slug === selectedLanguageSlug);
+}
 
 export default function Header() {
-  const selectedLanguage = useNTVStore((state) => state.selectedLanguage);
+  const selectedLanguage = useSelectedLanguage();
   const title = selectedLanguage?.title
     ? selectedLanguage.title
     : "Name the Var";
