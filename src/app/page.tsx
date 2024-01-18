@@ -2,8 +2,10 @@
 
 import { cn } from "@/lib/utils";
 import { useNTVStore } from "@/store/store";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
   const today = new Date();
   const dayOfWeek = today.getDay();
   const languages = useNTVStore((state) => state.languages);
@@ -108,6 +110,9 @@ export default function Home() {
         </div>
 
         <button
+        onClick={() => {
+          router.push(`/name-the/${selectedLanguage?.slug}`);
+        }}
           disabled={disableButton}
           className="mt-6 rounded-full bg-neutral-800 px-5 py-3 font-medium text-white transition-all duration-100 hover:bg-neutral-700 active:scale-95 disabled:opacity-50 sm:px-4 sm:py-2"
         >
