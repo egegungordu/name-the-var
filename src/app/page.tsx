@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { LANGUAGES } from "@/languages";
 import { useRouter } from "next/navigation";
 import { useQueryState } from "nuqs";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const router = useRouter();
@@ -107,7 +108,7 @@ export default function Home() {
                   style={{ "--tw-gradient-from": lang.color } as any}
                 />
               )}
-            </button>
+            </motion.button>
           ))}
         </div>
 
