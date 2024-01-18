@@ -3,7 +3,7 @@ import { LuGithub } from "react-icons/lu";
 
 export default function Footer() {
   return (
-    <footer className="mx-auto flex w-full max-w-screen-md pb-4 text-xs">
+    <footer className="mx-auto flex w-full max-w-screen-md py-4 text-xs">
       <span className="ml-auto">
         <Link
           href="https://github.com/egegungordu/name-the-var"
