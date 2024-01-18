@@ -77,12 +77,15 @@ export default function Home() {
         </div>
 
         <div className="mt-6 grid w-full grid-cols-2 gap-2 sm:grid-cols-4">
-          {LANGUAGES.map((lang) => (
-            <button
+          {LANGUAGES.map((lang, i) => (
+            <motion.button
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.02, ease: "easeInOut" }}
               onClick={() => handleClickLanguage(lang.slug)}
               key={lang.slug}
               className={cn(
-                "relative isolate flex items-center gap-2 overflow-hidden rounded-md border border-neutral-200 bg-white p-3 transition-all hover:opacity-100 sm:flex-col sm:justify-center",
+                "relative isolate flex items-center gap-2 overflow-hidden rounded-md border border-neutral-200 bg-white p-3 transition-colors hover:opacity-100 sm:flex-col sm:justify-center",
                 {
                   "border-neutral-800 ring-1 ring-neutral-800":
                     lang.slug === selectedLanguageSlug,

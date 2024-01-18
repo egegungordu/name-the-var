@@ -16,7 +16,7 @@ const config: Config = {
       animation: {
         "selected-language-in": "selected-language-in 0.1s ease-in-out",
         "squiggly-slide": "squiggly-slide 6s linear infinite",
-        "fade-in": "fade-in 0.3s ease-in-out",
+        "fade-in": "fade-in 0.2s ease-in-out",
       },
       keyframes: {
         "selected-language-in": {
@@ -40,9 +40,11 @@ const config: Config = {
         "fade-in": {
           "0%": {
             opacity: "0",
+            transform: "scale(0.98)",
           },
           "100%": {
             opacity: "1",
+            transform: "scale(1)",
           },
         },
       },
