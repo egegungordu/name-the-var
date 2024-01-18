@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import { LANGUAGES } from "@/languages";
+import hljs, { PLACEHOLDER } from "@/lib/hljs";
+import Guess from "./_components/Guess";
 
 function doesLanguageExist(language: string) {
   return LANGUAGES.find((lang) => lang.slug === language);
@@ -8,11 +10,23 @@ function doesLanguageExist(language: string) {
 async function getTodaysCodeSnippet(_language: string) {
   await new Promise((resolve) => setTimeout(resolve, 1000));
   // TODO: fetch from API
-  return `
-      fn some_rust_code(snippet: &str) {
-        println!("{}", snippet);
-      }
-      `;
+  return `function foo() {
+  const bar = "bar";
+  const ${PLACEHOLDER} = "baz";
+  const qux = "qux";
+
+  return bar + ${PLACEHOLDER} + qux;
+}
+
+function foo() {
+  const bar = "bar";
+  const ${PLACEHOLDER} = "baz";
+  const qux = "qux";
+
+  return bar + ${PLACEHOLDER} + qux;
+}
+
+`;
 }
 
 export default async function GuessingPage({
@@ -30,14 +44,9 @@ export default async function GuessingPage({
     throw new Error("Something went wrong");
   }
 
-  return (
-    <div className="flex h-full flex-col items-center justify-center animate-fade-in">
-      <div className="text-3xl font-semibold text-neutral-700">
-        {params.language}
-      </div>
-      <div className="text-3xl font-semibold text-neutral-700">
-        {todaysCodeSnippet}
-      </div>
-    </div>
-  );
+  const highlightedCodeSnippet = hljs.highlight(todaysCodeSnippet, {
+    language: params.language,
+  });
+
+  return <Guess codeHtml={highlightedCodeSnippet.value} />;
 }
