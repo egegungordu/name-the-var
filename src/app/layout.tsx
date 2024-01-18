@@ -9,7 +9,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Name the Var",
-  description: "Name the Var is a game to help you gain intuition for variable naming.",
+  description:
+    "Name the Var is a game to help you gain intuition for variable naming.",
 };
 
 export default function RootLayout({
