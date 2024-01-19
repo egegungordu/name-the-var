@@ -5,6 +5,7 @@ import { LANGUAGES } from "@/languages";
 import { useRouter } from "next/navigation";
 import { useQueryState } from "nuqs";
 import { motion } from "framer-motion";
+import Button from "./_components/Button";
 
 export default function Home() {
   const router = useRouter();
@@ -115,15 +116,16 @@ export default function Home() {
           ))}
         </div>
 
-        <button
+        <Button
+          variant="primary"
           onClick={() => {
             router.push(`/name-the/${selectedLanguageSlug}`);
           }}
           disabled={disableButton}
-          className="mt-6 rounded-full bg-neutral-800 px-5 py-3 font-medium text-white transition-all duration-100 hover:bg-neutral-700 active:scale-95 disabled:opacity-50 sm:px-4 sm:py-2"
+          className="mt-6"
         >
           {buttonPrompt}
-        </button>
+        </Button>
       </div>
     </main>
   );

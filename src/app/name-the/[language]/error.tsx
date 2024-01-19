@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "@/app/_components/Button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useTransition } from "react";
@@ -50,19 +51,17 @@ export default function Error({
         </div>
 
         <div className="absolute left-1/2 top-full mt-4 flex -translate-x-1/2 gap-2">
-          <Link
-            href="/"
-            className="whitespace-nowrap rounded-full px-3 py-1 text-xs hover:text-neutral-500"
-          >
-            Go back
+          <Link href="/">
+            <Button variant="secondary">Go back</Button>
           </Link>
-          <button
-            disabled={pending}
+
+          <Button
+            variant="primary"
             onClick={handleResetClick}
-            className="whitespace-nowrap rounded-full bg-neutral-800 px-3 py-1 text-xs font-medium text-neutral-200 hover:bg-neutral-600 disabled:opacity-50"
+            disabled={pending}
           >
             Try again
-          </button>
+          </Button>
         </div>
 
         {pending && (
