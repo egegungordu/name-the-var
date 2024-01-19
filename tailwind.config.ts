@@ -17,6 +17,7 @@ const config: Config = {
         "selected-language-in": "selected-language-in 0.1s ease-in-out",
         "squiggly-slide": "squiggly-slide 6s linear infinite",
         "fade-in": "fade-in 0.2s ease-in-out",
+        "shake": "shake 0.82s cubic-bezier(.36,.07,.19,.97) both",
       },
       keyframes: {
         "selected-language-in": {
@@ -45,6 +46,20 @@ const config: Config = {
           "100%": {
             opacity: "1",
             transform: "scale(1)",
+          },
+        },
+        "shake": {
+          "10%, 90%": {
+            transform: "translate3d(-1px, 0, 0)",
+          },
+          "20%, 80%": {
+            transform: "translate3d(1px, 0, 0)",
+          },
+          "30%, 50%, 70%": {
+            transform: "translate3d(-2px, 0, 0)",
+          },
+          "40%, 60%": {
+            transform: "translate3d(2px, 0, 0)",
           },
         },
       },
