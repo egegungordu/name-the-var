@@ -29,7 +29,7 @@ export default function Guess({ codeHtml }: { codeHtml: string }) {
   });
 
   return (
-    <div className="mx-auto flex max-w-full flex-1 animate-fade-in flex-col items-start lg:max-w-screen-md w-full">
+    <div className="mx-auto flex w-full max-w-full flex-1 animate-fade-in flex-col items-start lg:max-w-screen-md">
       <div className="mt-auto w-full">
         <Hint />
       </div>
@@ -81,7 +81,7 @@ export default function Guess({ codeHtml }: { codeHtml: string }) {
           className="w-full rounded-full px-4 py-2 shadow-lg shadow-black/5 focus:outline-none"
         />
 
-        <button className="rounded-full bg-white h-full aspect-square grid place-items-center shadow-lg shadow-black/5 hover:shadow-black/10 focus:outline-none transition-all">
+        <button className="grid aspect-square h-full place-items-center rounded-full bg-white shadow-lg shadow-black/5 transition-all hover:shadow-black/10 focus:outline-none">
           <LuArrowRight className="h-4 w-4 text-neutral-500" />
         </button>
       </div>

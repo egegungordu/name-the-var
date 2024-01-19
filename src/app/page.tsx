@@ -81,16 +81,19 @@ export default function Home() {
           {LANGUAGES.map((lang, i) => (
             <motion.button
               initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.02, ease: "easeInOut" }}
+              animate={{
+                opacity: lang.slug !== selectedLanguageSlug ? 0.5 : 1,
+                y: 0,
+              }}
+              whileHover={{ opacity: 1, transition: { duration: 0.1 } }}
               onClick={() => handleClickLanguage(lang.slug)}
+              transition={{ delay: 0.015 * i, ease: "easeInOut" }}
               key={lang.slug}
               className={cn(
-                "relative isolate flex items-center gap-2 overflow-hidden rounded-md border border-neutral-200 bg-white p-3 transition-colors hover:opacity-100 sm:flex-col sm:justify-center",
+                "relative isolate flex items-center gap-2 overflow-hidden rounded-md border border-neutral-200 bg-white p-3 transition-colors sm:flex-col sm:justify-center",
                 {
                   "border-neutral-800 ring-1 ring-neutral-800":
                     lang.slug === selectedLanguageSlug,
-                  "opacity-60": lang.slug !== selectedLanguageSlug,
                 },
               )}
             >

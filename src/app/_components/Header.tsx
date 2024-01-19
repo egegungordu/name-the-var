@@ -33,7 +33,7 @@ export default function Header() {
       <div className="relative">
         <Link
           href="/"
-          className="whitespace-nowrap text-2xl font-semibold text-neutral-700 bg-[url('/squiggly.svg')] bg-repeat-x pb-2 animate-squiggly-slide hover:text-neutral-400"
+          className="animate-squiggly-slide whitespace-nowrap bg-[url('/squiggly.svg')] bg-repeat-x pb-2 text-2xl font-semibold text-neutral-700 hover:text-neutral-400"
           style={{
             backgroundPosition: "0% 100%",
           }}

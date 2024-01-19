@@ -32,7 +32,7 @@ pub fn use_eval(${PLACEHOLDER}: &ScopeState) -> &EvalCreator {
         }) as Rc<dyn Fn(&str) -> Result<UseEval, EvalError>>
     })
 }`;
-return `try {
+  return `try {
   /*
    * The \`onRender\` function could contain \`expect\` calls that throw
    * \`JestAssertionError\`s - but we are still inside of React, where errors

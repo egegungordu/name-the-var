@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { LuFile, LuFiles, LuFolders } from "react-icons/lu";
+import { LuFile } from "react-icons/lu";
 import { cn } from "@/lib/utils";
 
 // DioxusLabs/dioxus
@@ -33,18 +33,18 @@ function Hint2() {
   return (
     <div className="pl-1 text-neutral-700">
       <span className="block text-xs text-neutral-400">About</span>
-      Fullstack GUI library for desktop, web, mobile, and more.
-      Fullstack GUI library for desktop, web, mobile, and more.
-      Fullstack GUI library for desktop, web, mobile, and more.
-      Fullstack GUI library for desktop, web, mobile, and more.
-      Fullstack GUI library for desktop, web, mobile, and more.
+      Fullstack GUI library for desktop, web, mobile, and more. Fullstack GUI
+      library for desktop, web, mobile, and more. Fullstack GUI library for
+      desktop, web, mobile, and more. Fullstack GUI library for desktop, web,
+      mobile, and more. Fullstack GUI library for desktop, web, mobile, and
+      more.
     </div>
   );
 }
 
 function Hint3() {
   return (
-    <div className="rounded-md border border-neutral-300/30 bg-white px-3 py-1 my-2 font-mono text-neutral-700">
+    <div className="my-2 rounded-md border border-neutral-300/30 bg-white px-3 py-1 font-mono text-neutral-700">
       <LuFile className="mr-2 inline-block text-neutral-400" />
       <span className="mr-2 font-sans text-xs text-neutral-400">File path</span>
       /packages/html/src/eval.rs
@@ -82,7 +82,7 @@ export default function Hint() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="overflow-hidden shrink-0"
+              className="shrink-0 overflow-hidden"
             >
               <Hint1 />
             </motion.div>
@@ -109,7 +109,7 @@ export default function Hint() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             onClick={handleHintClick}
-            className="whitespace-nowrap px-1 text-xs font-medium text-neutral-400 hover:text-neutral-600 flex items-center gap-1"
+            className="flex items-center gap-1 whitespace-nowrap px-1 text-xs font-medium text-neutral-400 hover:text-neutral-600"
           >
             {Array.from({ length: HINT_COUNT }).map((_, index) => (
               <div
@@ -120,9 +120,7 @@ export default function Hint() {
                 )}
               />
             ))}
-            <span className="ml-1 py-1">
-            {hintPrompt}
-            </span>
+            <span className="ml-1 py-1">{hintPrompt}</span>
           </motion.button>
         )}
 

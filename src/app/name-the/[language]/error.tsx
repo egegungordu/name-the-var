@@ -2,7 +2,7 @@
 
 export default function Error() {
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full">
+    <div className="flex h-full w-full flex-col items-center justify-center">
       Something went wrong.
     </div>
   );
