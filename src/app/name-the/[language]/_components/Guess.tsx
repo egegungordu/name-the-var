@@ -10,11 +10,12 @@ import { LuArrowRight } from "react-icons/lu";
 const codeAreaMask =
   "linear-gradient(0deg, transparent, black 64px, black calc(100% - 64px), transparent)";
 
-export default function Guess({ codeHtml }: { codeHtml: string }) {
+export default function Guess({ language, codeHtml }: { language: string, codeHtml: string }) {
   const codeRef = useRef<HTMLPreElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useWindowEventListener("keydown", (e) => {
+  useWindowEventListener("keydown", () => {
+    // TODO: shouldnt focus on all keys
     inputRef.current?.focus();
   });
 
@@ -31,7 +32,7 @@ export default function Guess({ codeHtml }: { codeHtml: string }) {
   return (
     <div className="mx-auto flex w-full max-w-full flex-1 animate-fade-in flex-col items-start lg:max-w-screen-md">
       <div className="mt-auto w-full">
-        <Hint />
+        <Hint language={language} />
       </div>
 
       <div className="max-h-[469px] w-full overflow-auto rounded-md border border-neutral-300/30 bg-white">

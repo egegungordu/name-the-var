@@ -9,8 +9,7 @@ import csharp from "highlight.js/lib/languages/csharp";
 import go from "highlight.js/lib/languages/go";
 import "highlight.js/styles/panda-syntax-light.css";
 import { LanguageFn } from "highlight.js";
-
-export const PLACEHOLDER = "PLACEHOLDER_MIKASA_BEST_GIRL";
+import { PLACEHOLDER } from "@/constants";
 
 // add PLACEHOLDER as a special keyword to all given language
 function languageWithPlaceholder(language: LanguageFn): LanguageFn {
